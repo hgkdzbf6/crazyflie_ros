@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!--用法：打 roslaunch crazyflie_demo my_hover.launch index:=1 即可-->
 <launch>
     <arg name="index" default="1" />  
     <arg name="px" default="0" />
