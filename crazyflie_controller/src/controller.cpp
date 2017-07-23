@@ -151,7 +151,7 @@ private:
                 }
                 else
                 {
-                    m_thrust += 10000 * dt;
+                    m_thrust += 40000 * dt;
                     geometry_msgs::Twist msg;
                     msg.linear.z = m_thrust;
                     m_pubNav.publish(msg);
@@ -174,6 +174,7 @@ private:
         case Automatic:
             {
                 tf::StampedTransform transform;
+                //输出位置的差，输出为transform
                 m_listener.lookupTransform(m_worldFrame, m_frame, ros::Time(0), transform);
 
                 geometry_msgs::PoseStamped targetWorld;
@@ -182,6 +183,7 @@ private:
                 targetWorld.pose = m_goal.pose;
 
                 geometry_msgs::PoseStamped targetDrone;
+                //坐标转换
                 m_listener.transformPose(m_frame, targetWorld, targetDrone);
 
                 tfScalar roll, pitch, yaw;
@@ -194,6 +196,7 @@ private:
                     )).getRPY(roll, pitch, yaw);
 
                 geometry_msgs::Twist msg;
+                //目标是targetDrone，自身因为已经进行过了坐标转换，所以是0
                 msg.linear.x = m_pidX.update(0, targetDrone.pose.position.x);
                 msg.linear.y = m_pidY.update(0.0, targetDrone.pose.position.y);
                 msg.linear.z = m_pidZ.update(0.0, targetDrone.pose.position.z);

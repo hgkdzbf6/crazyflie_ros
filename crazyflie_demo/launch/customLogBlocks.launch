@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <launch>
-  <arg name="uri" default="radio://0/80/2M" />
+  <arg name="uri" default="radio://0/100/250K/E7E7E7E702" />
 
   <include file="$(find crazyflie_driver)/launch/crazyflie_server.launch">
   </include>
@@ -12,10 +12,11 @@
       <param name="uri" value="$(arg uri)" />
       <param name="tf_prefix" value="crazyflie" />
       <rosparam>
-        genericLogTopics: ["log1", "log2"]
-        genericLogTopicFrequencies: [10, 100]
-        genericLogTopic_log1_Variables: ["pm.vbat"]
-        genericLogTopic_log2_Variables: ["acc.x", "acc.y", "acc.z"]
+        genericLogTopics: ["thrust", "vz_pid","sp_vz"]
+        genericLogTopicFrequencies: [100, 100 ,100]
+        genericLogTopic_thrust_Variables: ["stabilizer.thrust","posCtlPid.thrustBase"]
+        genericLogTopic_vz_pid_Variables: ["posCtl.VZp", "posCtl.VZi", "posCtl.VZd"]
+        genericLogTopic_sp_vz_Variables: ["posCtl.targetVZ", "posCtl.targetZ"]
       </rosparam>
     </node>
 

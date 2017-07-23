@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="index" default="1" />  
+    <arg name="px" default="0" />
+    <arg name="py" default="0" />
+    <arg name="pz" default="1" />
+    <include file="$(find crazyflie_demo)/launch/hover_vicon.launch">
+        <arg name="uri" value="radio://0/100/250K/E7E7E7E70$(arg index)" />
+        <arg name="frame" value="/vicon/C$(arg index)/C$(arg index)" />
+        <arg name="x" value="$(arg px)" />
+        <arg name="y" value="$(arg py)" />
+        <arg name="z" value="$(arg pz)" />
+    </include>
+</launch>

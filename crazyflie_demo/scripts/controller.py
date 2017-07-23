@@ -51,7 +51,12 @@ class Controller():
                     else:
                         rospy.set_param("ring/headlightEnable", 0)
                     self._update_params(["ring/headlightEnable"])
-                    print(not value)
+                    print not value
+
+                if i == 5 and data.buttons[i] == 1:
+                    value = int(rospy.get_param("posCtlPid/thrustBase"))
+                    print value
+                    self._update_params(["posCtlPid/thrustBase"])
 
         self._buttons = data.buttons
 
